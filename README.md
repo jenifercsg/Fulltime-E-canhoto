@@ -1,18 +1,16 @@
 # Documentação E-Canhoto
 
-## Informações do grupo
-
 - Instuição: UNIMAR.
 - Curso: Analíse e Desenvolvimento de Sistemas.
 - Termo: 3 - A.
 
-Participantes:
-- Amanda Vieira - RA: 1957289.
-- Daniel Oliveira - RA: 1972388.
-- Eduardo Evaristo - RA: 1959599.
-- Giovana Colombo - RA: 1961041.
-- Jenifer Gonçalves - RA: 1962781.
-- João Pedro Lopes - RA: 1963012.
+Trabalho feito por:
+- Amanda Vieira 
+- Daniel Oliveira 
+- Eduardo Evaristo 
+- Giovana Colombo 
+- Jenifer Gonçalves 
+- João Pedro Lopes 
 
 ## Landing Page
 
