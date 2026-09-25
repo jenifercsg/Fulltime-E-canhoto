@@ -4,14 +4,15 @@
             <div class="container-fluid d-flex justify-content-end align-items-center">
 
                 <div class="image-profile rounded-circle">
-                    <img :src=this.urlPerfilFoto alt="Imagem de perfil" class="rounded-circle" width="40">
+                    <img v-if="urlPerfilFoto" :src="urlPerfilFoto" alt="Imagem de perfil" class="rounded-circle" width="40">
+                    <img v-else src="@/assets/img/profile-circle-example.png" alt="Imagem de perfil padrão" class="rounded-circle" width="40">
                 </div>
             </div>
         </nav>
 
         <div class="background-colors">
             <h6 class="text p-5 ms-5">
-                Canhotos
+                {{ $t('canhotos.title') }}
             </h6>
 
             <div class="row cards-principal">
@@ -19,28 +20,28 @@
                 <div class="col-md-8 mt-5 bg-white dados-canhoto-table table-responsive">
 
                     <div class="text-table">
-                        <h4 class="mt-4 ms-3 mb-3 canhotos-table-title">Últimos canhotos</h4>
+                        <h4 class="mt-4 ms-3 mb-3 canhotos-table-title">{{ $t('dashboard.recent') }}</h4>
                     </div>
 
                     <DataTable :value="filteredCanhotos" paginator :rows="5">
                         <Column field="id" header="ID"></Column>
-                        <Column field="valorCanhoto" header="Valor">
+                        <Column field="valorCanhoto" :header="$t('canhotos.value')">
                             <template #body="slotProps">
                                 {{ this.formataValor(slotProps.data.valorCanhoto) }}
                             </template>
                         </Column>
-                        <Column field="numNf" header="NF"></Column>
-                        <Column field="colaboradorId" header="Gerador  (Entrega)">
+                        <Column field="numNf" :header="$t('canhotos.nf')"></Column>
+                        <Column field="colaboradorId" :header="$t('canhotos.generator')">
                             <template #body="slotProps">
                                 {{ this.buscaColaborador(slotProps.data.colaboradorId) }}
                             </template>
                         </Column>
-                        <Column field="dataInclusao" header="Data de Inclusão">
+                        <Column field="dataInclusao" :header="$t('canhotos.includedAt')">
                             <template #body="slotProps">
                                 {{ this.formataData(slotProps.data.dataInclusao) }}
                             </template>
                         </Column>
-                        <Column field="autenticado" header="Autenticado">
+                        <Column field="autenticado" :header="$t('canhotos.authenticated')">
                             <template #body="slotProps">
                                 <Badge class="d-flex justify-content-center"
                                     :value="slotProps.data.imagemCanhoto && slotProps.data.imagemCanhoto !== 'dW5kZWZpbmVk' ? 'SIM' : 'NÃO'"
@@ -48,12 +49,12 @@
                                 </Badge>
                             </template>
                         </Column>
-                        <Column header="Opções">
+                        <Column :header="$t('canhotos.options')">
                             <template #body="slotProps">
                                 <i class='bx bxs-edit' @click="editCanhoto(slotProps.data.id)"></i>
                             </template>
                         </Column>
-                        <Column header="Obter canhoto">
+                        <Column :header="$t('canhotos.getReceipt')">
                             <template #body="slotProps">
                                 <i class='bx bxs-file-export'
                                     :style="{ color: slotProps.data.imagemCanhoto && slotProps.data.imagemCanhoto !== 'dW5kZWZpbmVk' ? 'green' : 'red' }"
@@ -68,23 +69,23 @@
 
                     <div class="busca-canhoto-container-2">
 
-                        <Button label="Novo Canhoto +" @click="newCanhoto"
+                        <Button :label="`${$t('canhotos.newReceipt')} +`" @click="newCanhoto"
                             class="btn btn-outline-danger busca-canhoto-container-2-text" />
 
                         <div class="input-group mr-5">
                             <input class="busca-canhoto-container-2-input" type="text" name="Buscar canhotos"
-                                placeholder="Buscar canhoto via NF" v-model="searchQuery" @input="filterTable">
+                                :placeholder="$t('canhotos.search')" v-model="searchQuery" @input="filterTable">
                         </div>
                         <div class="busca-canhoto-container-2-cards">
 
                             <div class="card card-styles busca-canhoto-container-2-card-div">
                                 <div class="card-body d-flex align-items-start justify-content-between">
                                     <div>
-                                        <h5 class="card-title mt-3">Canhotos do mês</h5>
+                                        <h5 class="card-title mt-3">{{ $t('canhotos.receiptsMonth') }}</h5>
                                         <h1 class="card-text mt-3"> {{ totalCanhotosDoMes }}</h1>
                                         <h6 class="card-subtitle mb-2 text-body-secondary"><span class="fw-bold">{{
                                             totalCanhotosHoje }}
-                                            </span> Hoje</h6>
+                                            </span> {{ $t('common.today') }}</h6>
                                     </div>
                                     <img src="@/assets/img/icone-canhotos-mes.png" class="mt-2">
                                 </div>
@@ -93,7 +94,7 @@
                             <div class="card card-styles busca-canhoto-container-2-card-div">
                                 <div class="card-body d-flex align-items-start justify-content-between">
                                     <div>
-                                        <h5 class="card-title mt-3">Total de canhotos</h5>
+                                        <h5 class="card-title mt-3">{{ $t('canhotos.totalReceipts') }}</h5>
                                         <h1 class="card-text mt-3">{{ totalCanhotos }}</h1>
                                     </div>
                                     <img src="@/assets/img/icone-total-canhotos.png" class="mt-2">
@@ -104,61 +105,61 @@
                     </div>
                 </div>
 
-                <Dialog v-model:visible="visible" modal :header="isEditMode ? 'Atualizar canhoto' : 'Novo Canhoto'"
+                <Dialog v-model:visible="visible" modal :header="isEditMode ? $t('canhotos.update') : $t('canhotos.create')"
                     :style="{ width: isEditMode ? '73rem' : '75rem', height: isEditMode ? '29rem' : '33.9rem' }">
                     <div v-if="!isEditMode" class="flex align-items-center gap-4 mb-3">
-                        <label for="empresa" class="font-semibold mb-2">Empresa</label><br>
+                        <label for="empresa" class="font-semibold mb-2">{{ $t('canhotos.company') }}</label><br>
                         <InputText id="empresa" class="flex-auto w-100" v-model="post.empresa" :value=empresaRelacionada
                             disabled />
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="valor" class="mb-2">Valor do canhoto <span
+                            <label for="valor" class="mb-2">{{ $t('canhotos.receiptValue') }} <span
                                     class="text-danger">*</span></label><br>
                             <InputNumber class="mb-2" inputId="locale-brazil" locale="pt-BR" :minFractionDigits="2"
                                 v-model="post.valor" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="numNf" class="mb-2">Número da Nota fiscal <span
+                            <label for="numNf" class="mb-2">{{ $t('canhotos.nfNumber') }} <span
                                     class="text-danger">*</span></label><br>
                             <InputNumber id="numNf" class="flex-auto w-100" v-model="post.numeroNota" required />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="chaveNf" class="mb-2">Número da Chave da Nota Fiscal <span
-                                    class="text-warning">(Opcional)</span></label><br>
+                            <label for="chaveNf" class="mb-2">{{ $t('canhotos.nfKey') }} <span
+                                    class="text-warning">({{ $t('common.optional') }})</span></label><br>
                             <InputNumber id="chaveNf" class="flex-auto w-100" v-model="post.chaveNf" required />
                         </div>
 
                         <div class="col-md-4 mb-3" v-if="!isEditMode">
-                            <label for="colaborador" class="font-semibold mb-2">Gerado por</label><br>
+                            <label for="colaborador" class="font-semibold mb-2">{{ $t('canhotos.generatedBy') }}</label><br>
                             <InputText id="colaborador" class="w-100" disabled v-model="post.colaborador"
                                 :value=nomeUsuario />
                         </div>
 
                         <div class="col-md-8 mb-3">
-                            <label for="status" class="font-semibold mb-2">Status <span
+                            <label for="status" class="font-semibold mb-2">{{ $t('common.status') }} <span
                                     class="text-danger">*</span></label><br>
                             <Dropdown v-model="post.selectedStatus" :options="status" optionLabel="name"
-                                placeholder="Selecione o status" checkmark :highlightOnSelect="false" class="w-100" />
+                                :placeholder="$t('common.selectStatus')" checkmark :highlightOnSelect="false" class="w-100" />
                         </div>
 
                     </div>
 
                     <div class="flex align-items-center gap-3 mb-5" v-show="showUpload">
-                        <label for="image" class="font-semibold mb-2">Selecione a imagem do canhoto</label><br>
+                        <label for="image" class="font-semibold mb-2">{{ $t('canhotos.image') }}</label><br>
                         <FileUpload mode="basic" name="demo[]" accept="image/*" :maxFileSize="1000000"
                             @select="onSelect" class="w-15" chooseLabel="Upload" />
                     </div>
 
                     <div class="d-flex justify-content-end gap-2 mt-5">
                         <Button type="button" severity="secondary" @click="visible = false"
-                            class="btn btn-danger me-1">Cancelar</Button>
+                            class="btn btn-danger me-1">{{ $t('common.cancel') }}</Button>
                         <Button type="button" @click="isEditMode ? updateCanhoto(canhotoId) : saveCanhoto()"
                             class="btn btn-success">{{
-                                isEditMode ? 'Salvar Alterações' : 'Salvar' }}</Button>
+                                isEditMode ? $t('common.saveChanges') : $t('common.save') }}</Button>
                     </div>
                 </Dialog>
 

@@ -1,1 +1,0 @@
-import{k as r}from"./index-B7nQnldg.js";class t{getAll(){return r.get("/Empresa")}create(e){return r.post("/Empresa",e)}getEmpresa(e){return r.get("/Empresa/nome/"+e)}getEmpresaPorId(e){return r.get("/Empresa/id/"+e)}}const p=new t;export{p as P};

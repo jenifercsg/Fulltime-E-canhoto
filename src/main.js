@@ -1,4 +1,5 @@
 import './assets/main.css'
+import { installI18n } from './locales/index.js'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -25,6 +26,7 @@ import Dialog from 'primevue/dialog';
 
 const app = createApp(App);
 app.use(PrimeVue);
+installI18n(app);
 
 app.use(router)
 app.use(createPinia())

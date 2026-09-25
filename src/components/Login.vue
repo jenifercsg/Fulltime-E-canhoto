@@ -14,7 +14,7 @@
               v-model="user.email"
               @input="hideLabel('floatingInputLabel')"
             />
-            <label for="floatingInput" id="floatingInputLabel">Insira seu e-mail</label>
+            <label for="floatingInput" id="floatingInputLabel">{{ t('auth.email') }}</label>
           </div>
           <div class="form-floating">
             <input
@@ -25,10 +25,10 @@
               v-model="user.password"
               @input="hideLabel('floatingPasswordLabel')"
             />
-            <label for="floatingPassword" id="floatingPasswordLabel">Insira sua senha</label>
+            <label for="floatingPassword" id="floatingPasswordLabel">{{ t('auth.password') }}</label>
           </div>
           <a class="text-decoration-none" href="#">
-            <p class="p-2">Esqueceu seu acesso?</p>
+            <p class="p-2">{{ t('auth.forgot') }}</p>
           </a>
         </div>
   
@@ -38,10 +38,10 @@
   
         <div class="d-flex col-lg-12">
           <RouterLink to="/home" id="btnLogin" class="btn btn-sm w-75 d-flex justify-content-center" @click.prevent="login">
-            Login
+            {{ t('auth.login') }}
           </RouterLink>
           <RouterLink to="/" id="btnLogin" class="btn btn-sm w-25 ms-2 d-flex justify-content-center">
-            Voltar <i class='bx bx-undo'></i>
+            {{ t('auth.back') }} <i class='bx bx-undo'></i>
           </RouterLink>
         </div>
       </div>
@@ -50,10 +50,14 @@
   
   <script setup>
   import { reactive, ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import http from '@/http-common';
   import { useAuth } from '@/stores/auth.js';
+  import { useI18n } from '@/locales/index.js';
   
   const auth = useAuth();
+  const { t } = useI18n();
+  const router = useRouter();
   
   const user = reactive({
     email: '',
@@ -68,8 +72,9 @@
       auth.setToken(data.token);
       auth.setUser(data.user);
       errorMessage.value = ''; 
+      await router.push('/home');
     } catch (error) {
-      errorMessage.value = 'Dados incorretos. Por favor, tente novamente.';
+      errorMessage.value = t('auth.invalid');
     }
   }
   

@@ -6,8 +6,16 @@
       >
         <div class="image-profile rounded-circle">
           <img
+            v-if="urlPerfilFoto"
             :src="this.urlPerfilFoto"
             alt="Imagem de perfil"
+            class="rounded-circle"
+            width="40"
+          />
+          <img
+            v-else
+            src="@/assets/img/profile-circle-example.png"
+            alt="Imagem de perfil padrão"
             class="rounded-circle"
             width="40"
           />
@@ -16,7 +24,7 @@
     </nav>
 
     <div class="background-colors">
-      <h6 class="text p-5 ms-5">Usuários</h6>
+      <h6 class="text p-5 ms-5">{{ $t('users.title') }}</h6>
 
       <div class="row cards-principal">
         <div
@@ -24,17 +32,17 @@
         >
           <div class="text-table">
             <h4 class="mt-4 ms-3 mb-3 usuarios-table-title">
-              Colaboradores cadastrados
+              {{ $t('users.title') }}
             </h4>
           </div>
 
           <DataTable :value="colaboradores" paginator :rows="5">
             <Column field="id" header="ID"></Column>
-            <Column field="name" header="Nome"></Column>
-            <Column field="email" header="Email"></Column>
-            <Column field="dataNascimento" header="Data de Nascimento"></Column>
+            <Column field="name" :header="$t('users.name')"></Column>
+            <Column field="email" :header="$t('users.email')"></Column>
+            <Column field="dataNascimento" :header="$t('users.birthDate')"></Column>
 
-            <Column field="usuarioAdmin" header="É admin">
+            <Column field="usuarioAdmin" :header="$t('users.admin')">
               <template #body="slotProps">
                 <Badge
                   class="d-flex justify-content-center"
@@ -44,13 +52,13 @@
               </template>
             </Column>
 
-            <Column field="dataInclusao" header="Data de inclusão">
+            <Column field="dataInclusao" :header="$t('users.includedAt')">
               <template #body="slotProps">
                 {{ this.formataData(slotProps.data.dataInclusao) }}
               </template>
             </Column>
 
-            <Column header="Opções">
+            <Column :header="$t('users.options')">
               <template #body="slotProps">
                 <i
                   class="bx bxs-edit"

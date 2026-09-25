@@ -196,19 +196,36 @@
   }
 
   .home .background-colors {
+      position: relative;
       width: 100%;
       min-height: calc(100vh - 70px);
       height: auto;
-      background: linear-gradient(
-          to top,
-          var(--body-color) 80%,
-          var(--primary-color) 20%
-      );
+      overflow: hidden;
+      background: var(--body-color);
+  }
+
+  .home .background-colors::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: clamp(80px, 16vh, 145px);
+      background: var(--primary-color);
+      pointer-events: none;
+  }
+
+  .home .background-colors > * {
+      position: relative;
+      z-index: 1;
   }
 
   .cards-principal {
-      margin-left: 10vh;
-      width: 90% !important;
+      box-sizing: border-box;
+      width: 100% !important;
+      margin: 0 !important;
+      padding-inline: clamp(0.75rem, 3vw, 2rem);
   }
 
   .cards-colunas {
@@ -238,6 +255,28 @@
 
   .card-text {
       font-weight: 700;
+  }
+
+  .home .text-visao-geral,
+  .home .background-colors > h6.text {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      line-height: 1.2;
+  }
+
+  .home .image-profile {
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      flex: 0 0 40px;
+  }
+
+  .home .image-profile img {
+      display: block;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
   }
 
   .custom-flex {
@@ -423,6 +462,7 @@
 
   .p-dialog-content {
       max-width: 100%;
+      overflow-x: hidden;
   }
 
   @media (min-width: 992px) and (max-width: 1366px) {
@@ -507,6 +547,20 @@
 
       .p-dialog-content {
           overflow-y: auto;
+          overflow-x: hidden;
+      }
+
+      .p-dialog .row {
+          margin-inline: 0 !important;
+      }
+
+      .p-dialog .p-inputnumber,
+      .p-dialog .p-inputnumber-input,
+      .p-dialog .p-dropdown,
+      .p-dialog .p-inputtext {
+          box-sizing: border-box;
+          width: 100% !important;
+          max-width: 100%;
       }
   }
 
@@ -540,6 +594,23 @@
 
       .home .background-colors {
           min-height: calc(100vh - 70px);
+      }
+
+      .home .principal-nav .container-fluid {
+          min-width: 0;
+          padding-inline: 0.75rem;
+      }
+
+      .home .background-colors > h6.text {
+          box-sizing: border-box;
+          width: 100%;
+          margin: 0;
+          padding: 1.25rem 1rem !important;
+          font-size: clamp(1.25rem, 5vw, 1.75rem);
+      }
+
+      .cards-principal {
+          padding-inline: 0.75rem;
       }
 
       .cards-colunas {
@@ -664,5 +735,47 @@
           transition-duration: 0.01ms !important;
           animation-duration: 0.01ms !important;
           animation-iteration-count: 1 !important;
+      }
+  }
+
+  /* Cards da visão geral: grade estável em desktop, tablet e celular */
+  .home .background-colors > .row:first-of-type {
+      box-sizing: border-box;
+      width: 100%;
+      margin-inline: 0;
+      padding-inline: clamp(0.5rem, 1.5vw, 1rem);
+      row-gap: 1rem;
+      align-items: stretch;
+  }
+
+  .home .background-colors > .row:first-of-type > .cards-colunas {
+      display: flex;
+      min-width: 0;
+      align-items: stretch;
+  }
+
+  .home .background-colors > .row:first-of-type > .cards-colunas > .card,
+  .home .background-colors > .row:first-of-type > .cards-colunas > .card.me-2,
+  .home .background-colors > .row:first-of-type > .cards-colunas > .card.me-3 {
+      box-sizing: border-box;
+      width: 100% !important;
+      max-width: none;
+      height: 100%;
+      margin-right: 0 !important;
+      min-width: 0;
+  }
+
+  .home .background-colors > .row:first-of-type > .cards-colunas .card-body {
+      min-width: 0;
+  }
+
+  @media (max-width: 767.98px) {
+      .home .background-colors::before {
+          height: 4rem;
+      }
+
+      .home .background-colors > .row:first-of-type {
+          padding-inline: 0.75rem;
+          row-gap: 0.875rem;
       }
   }

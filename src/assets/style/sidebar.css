@@ -147,3 +147,90 @@
     background: #fc7171 !important;
     border: 8px !important;
 }
+
+.sidebar-language {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 14px;
+}
+
+.sidebar-language select {
+    width: 72px;
+    min-height: 32px;
+    padding: 4px 8px;
+    color: var(--text-color);
+    background: var(--sidebar-color);
+    border: 1px solid #d7d7d7;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 12px;
+}
+
+.sidebar.close .sidebar-language select {
+    width: 48px;
+}
+
+@media (max-width: 768px) {
+    .sidebar-language {
+        padding-bottom: 10px;
+    }
+}
+
+/* Acabamento da sidebar compacta sem alterar sua identidade visual */
+@media (max-width: 991.98px) {
+    .sidebar {
+        padding: 10px 8px;
+    }
+
+    .sidebar header .image-text {
+        min-height: 58px;
+    }
+
+    .sidebar .image-text img {
+        width: 62px;
+        height: auto;
+    }
+
+    .sidebar .menu-bar {
+        height: calc(100% - 58px);
+        justify-content: flex-start;
+    }
+
+    .sidebar .menu {
+        width: 100%;
+        margin-top: 18px;
+    }
+
+    .sidebar li {
+        width: 100%;
+        height: 44px;
+        margin-top: 8px;
+    }
+
+    .sidebar li .icon {
+        min-width: 60px;
+        font-size: 22px;
+    }
+
+    .sidebar .bottom-content {
+        width: 100%;
+        margin-top: 42px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .sidebar-language {
+        width: 100%;
+        margin-top: auto;
+        padding-top: 14px;
+        padding-bottom: 10px;
+    }
+
+    .sidebar-language select,
+    .sidebar.close .sidebar-language select {
+        width: 58px;
+        min-height: 30px;
+        padding: 3px 5px;
+        text-align: center;
+        font-size: 11px;
+    }
+}

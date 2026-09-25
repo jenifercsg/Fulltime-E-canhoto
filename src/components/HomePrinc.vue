@@ -10,29 +10,41 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="#beneficios">Benefícios</a>
+              <a class="nav-link active" href="#beneficios">{{ t('nav.benefits') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#planos">Compare os planos</a>
+              <a class="nav-link active" href="#planos">{{ t('nav.plans') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contato">Contato</a>
+              <a class="nav-link" href="#contato">{{ t('nav.contact') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#servicos">Serviços</a>
+              <a class="nav-link" href="#servicos">{{ t('nav.services') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#produtos">Nossos produtos</a>
+              <a class="nav-link" href="#produtos">{{ t('nav.products') }}</a>
             </li>
           </ul>
-          <div class="d-flex">
+          <div class="d-flex navbar-actions">
             <a href="#planos"
-              class="btn btn-sm btn__conheca__produto me-4 d-flex align-items-center justify-content-center">Conheça o
-              e-canhoto</a>
+              class="btn btn-sm btn__conheca__produto me-4 d-flex align-items-center justify-content-center">{{ t('nav.discover') }}</a>
 
             <RouterLink to="/login"
-              class="btn__conheca__produto btn btn-sm d-flex align-items-center justify-content-center">Já é cliente?
-              Login</RouterLink>
+              class="btn__conheca__produto btn btn-sm d-flex align-items-center justify-content-center">{{ t('nav.login') }}</RouterLink>
+
+            <label class="language-selector ms-2">
+              <span class="visually-hidden">{{ t('language') }}</span>
+              <select
+                class="form-select form-select-sm"
+                :value="locale"
+                :aria-label="t('language')"
+                @change="setLocale($event.target.value)"
+              >
+                <option v-for="language in locales" :key="language" :value="language">
+                  {{ language === 'pt-BR' ? 'Português' : language === 'en-US' ? 'English' : 'Español' }}
+                </option>
+              </select>
+            </label>
           </div>
         </div>
       </div>
@@ -41,11 +53,10 @@
     <div class="container-sm">
       <div class="row mt-5">
         <div class="col-md-5 text__main__1 me-auto">
-          <p class="p__main">ALAVANQUE SUAS NOTAS FISCAIS</p>
-          <h1 class="h1__main">Impulsione a gestão de canhotos da sua empresa</h1>
-          <h6 class="h5__main">Reduza a burocracia e o tempo gastos com gestão <br>de canhotos, notas fiscais e recibos
-            em sua <br>empresa.</h6>
-          <a href="" class="btn btn-sm btn__comecar d-flex align-items-center justify-content-center">Comece agora</a>
+          <p class="p__main">{{ t('hero.eyebrow') }}</p>
+          <h1 class="h1__main">{{ t('hero.title') }}</h1>
+          <h6 class="h5__main">{{ t('hero.description') }}</h6>
+          <a href="#beneficios" class="btn btn-sm btn__comecar d-flex align-items-center justify-content-center">{{ t('hero.action') }}</a>
         </div>
         <div class="col-md-6 img__main">
           <img src="@/assets/img/Oval.png" alt="Logo da imagem 1" class="img-fluid">
@@ -58,10 +69,8 @@
     <div class="container-sm">
       <div class="row mt-5">
         <div class="col-md-12">
-          <h6 class="p__segundo__text mt-5">BENEFÍCIOS DO E-CANHOTO FULLTIME</h6>
-          <h6 class="h6__segundo__text upper-case mt-5 mb-5">Aplicativo com plataforma Web integrada, desenvolvido para
-            otimizar a gestão de entregas,
-            substituindo o comprovante de entrega físico por uma solução inteligente com armazenamento online.</h6>
+          <h6 class="p__segundo__text mt-5">{{ t('benefits.eyebrow') }}</h6>
+          <h6 class="h6__segundo__text upper-case mt-5 mb-5">{{ t('benefits.description') }}</h6>
         </div>
 
       </div>
@@ -71,18 +80,18 @@
   <div class="container-fluid beneficios__cards d-flex justify-content-center position-relative mt-5">
     <div class="col-md-3 segundo__bloco__1">
       <img src="@/assets/img/cloud.png" class="img__icone__1 img-fluid" alt="">
-      <h6 class="bloco__text__1">Cloud</h6>
-      <p class="bloco__text__2">Armazenamento e upload de seus canhotos em nuvem com disponibilidade on-demand.</p>
+      <h6 class="bloco__text__1">{{ t('benefits.cloud') }}</h6>
+      <p class="bloco__text__2">{{ t('benefits.cloudDescription') }}</p>
     </div>
     <div class="col-md-3 segundo__bloco__2">
       <img src="@/assets/img/security.png" class="img__icone__2 img-fluid" alt="">
-      <h6 class="bloco__text">Segurança</h6>
-      <p class="bloco__text__2">Todas as suas informações de pagamento com segurança anti-invasões.</p>
+      <h6 class="bloco__text">{{ t('benefits.security') }}</h6>
+      <p class="bloco__text__2">{{ t('benefits.securityDescription') }}</p>
     </div>
     <div class="col-md-3 segundo__bloco__3">
       <img src="@/assets/img/storage.png" class="img__icone__3 img-fluid" alt="">
-      <h6 class="bloco__text">Armazenamento</h6>
-      <p class="bloco__text__2">Armazene toneladas de arquivos quando quiser.</p>
+      <h6 class="bloco__text">{{ t('benefits.storage') }}</h6>
+      <p class="bloco__text__2">{{ t('benefits.storageDescription') }}</p>
     </div>
     <div class="bolhas__content">
       <img src="@/assets/img/bolhas.png" class="img-fluid" alt="" width="220">
@@ -97,11 +106,8 @@
 
       <div class="col-md-9 text__main__1">
         <img src="@/assets/img/Stars.png" alt="Logo da imagem 1" class="img-fluid h6__main__stars">
-        <h6 class="h6__main__quarto__container">“Depois de começarmos a utilizar o E-Canhoto em nossa equipe de Fiscal e
-          Contabilidade
-          conseguimos reduzir as demandas de busca por notas pela metade!”</h6>
-        <p class="p__main__text__quarto__container"><span class="p__main__quarto__texto">Isabely Oliveira</span> | Chefe
-          executiva da neXus</p>
+        <h6 class="h6__main__quarto__container">{{ t('testimonial.quote') }}</h6>
+        <p class="p__main__text__quarto__container"><span class="p__main__quarto__texto">{{ t('testimonial.author') }}</span> | {{ t('testimonial.role') }}</p>
       </div>
 
     </div>
@@ -111,15 +117,15 @@
     <div class="container-sm d-flex quinto__container">
       <div class="col-md-4 me-5 bloco__quinto__valores">
         <h1 class="text__quinto__container">+R$500.000</h1>
-        <p class="bloco__texto__5">de economia com custos operacionais tradicionalistas.</p>
+        <p class="bloco__texto__5">{{ t('metrics.economy') }}</p>
       </div>
       <div class="col-md-4 me-5 bloco__quinto__valores">
         <h1 class="text__quinto__container">95%</h1>
-        <p class="bloco__texto__5">de redução de tempo em gestão de canhotos.</p>
+        <p class="bloco__texto__5">{{ t('metrics.time') }}</p>
       </div>
       <div class="col-md-4 me-2 bloco__quinto__valores">
         <h1 class="text__quinto__container">4.9/5.0</h1>
-        <p class="bloco__texto__5">Nota da avaliação geral dos clientes do E-canhoto.</p>
+        <p class="bloco__texto__5">{{ t('metrics.rating') }}</p>
       </div>
     </div>
   </div>
@@ -128,18 +134,16 @@
     <div class="container-sm sexto__container">
       <div class="row mt-5">
         <div class="col-md-12 text-center">
-          <p class="p__sexto__text upper-case mt-4">POR QUE NOS ESCOLHER?</p>
-          <h1 class="h1__sexto__text">Oferecemos o melhor serviço de <br>gestão de canhotos</h1>
+          <p class="p__sexto__text upper-case mt-4">{{ t('services.eyebrow') }}</p>
+          <h1 class="h1__sexto__text">{{ t('services.title') }}</h1>
         </div>
         <div class="col-md-12 sexto__container__cards">
           <div class="row">
             <div class="col-md-6 sexto__bloco__1 mb-5">
               <img src="@/assets/img/pessoa.jpg" class="img-fluid" alt="">
               <div class="ms-3">
-                <h6 class="sexto__text__h6">Atendimento personalizado</h6>
-                <p class="sexto__text__p">Atendimento humanizado e <br>solicito, com treinamento da<br> plataforma e
-                  suas funcionalidades.
-                </p>
+                <h6 class="sexto__text__h6">{{ t('services.personalized') }}</h6>
+                <p class="sexto__text__p">{{ t('services.personalizedDescription') }}</p>
               </div>
 
             </div>
@@ -147,10 +151,8 @@
             <div class="col-md-6 sexto__bloco__1 mb-5">
               <img src="@/assets/img/multitarefa.jpg" class="img-fluid" alt="">
               <div class="ms-3">
-                <h6 class="sexto__text__h6">Multi-tarefas</h6>
-                <p class="sexto__text__p">Uma aplicação robusta e com eficiência, onde <br>trabalhamos diretamente em
-                  sua otimização<br>para integração dos canhotos com segurança.
-                </p>
+                <h6 class="sexto__text__h6">{{ t('services.multitasks') }}</h6>
+                <p class="sexto__text__p">{{ t('services.multitasksDescription') }}</p>
               </div>
 
             </div>
@@ -160,10 +162,8 @@
             <div class="col-md-6 sexto__bloco__1 mt-4">
               <img src="@/assets/img/conversa.jpg" class="img-fluid" alt="">
               <div class="ms-3">
-                <h6 class="sexto__text__h6">Relatórios personalizados</h6>
-                <p class="sexto__text__p">Exportação em Excel e PDF <br>personalizado de seus fluxos, de acordo <br>com
-                  o filtro que você indicar.
-                </p>
+                <h6 class="sexto__text__h6">{{ t('services.reports') }}</h6>
+                <p class="sexto__text__p">{{ t('services.reportsDescription') }}</p>
               </div>
 
             </div>
@@ -171,10 +171,8 @@
             <div class="col-md-6 sexto__bloco__1 mt-4">
               <img src="@/assets/img/gestao.jpg" class="img-fluid" alt="">
               <div class="ms-3">
-                <h6 class="sexto__text__h6">Gestão de Entregas</h6>
-                <p class="sexto__text__p">Trabalhamos diretamente com a <br>geolocalização de suas entregas, removendo
-                  a<br> preocupação com a falta de entregas.
-                </p>
+                <h6 class="sexto__text__h6">{{ t('services.deliveries') }}</h6>
+                <p class="sexto__text__p">{{ t('services.deliveriesDescription') }}</p>
               </div>
             </div>
           </div>
@@ -190,8 +188,8 @@
     <div class="container-sm">
       <div class="row mt-5">
         <div class="col-md-12">
-          <p class="p__setimo__text upper-case mt-5">outros produtos <span class="p__span__text__setimo">fulltime®</span></p>
-          <h1 class="h1__setimo__text">Conheça o ecossistema <span class="h1__span__text__setimo">Fulltime.</span></h1>
+          <p class="p__setimo__text upper-case mt-5">{{ t('products.eyebrow') }}</p>
+          <h1 class="h1__setimo__text">{{ t('products.title') }}</h1>
         </div>
         <div class="col-md-12 setimo__container__cards">
           <div class="row">
@@ -203,7 +201,7 @@
               </div>
 
               <div class="text__setimo text-start mt-3">
-                <p class="setimo__conteudo__text__card__1">Segurança e monitoramento</p>
+                <p class="setimo__conteudo__text__card__1">{{ t('products.security') }}</p>
                 <h3 class="upper-case setimo__conteudo__text2__card__1">Full Cam</h3>
               </div>
             </div>
@@ -215,7 +213,7 @@
               </div>
 
               <div class="text__setimo-2 text-start mt-3">
-                <p class="setimo__conteudo__text__card__1">Controle de SIM Cards</p>
+                <p class="setimo__conteudo__text__card__1">{{ t('products.simCards') }}</p>
                 <h3 class="upper-case setimo__conteudo__text2__card__1">Full Manager</h3>
               </div>
             </div>
@@ -229,7 +227,7 @@
                 </div>
 
                 <div class="text__setimo text-start mt-3">
-                  <p class="setimo__conteudo__text__card__1">Agilidade em operações</p>
+                  <p class="setimo__conteudo__text__card__1">{{ t('products.operations') }}</p>
                   <h3 class="upper-case setimo__conteudo__text2__card__1">FULL CENTER</h3>
                 </div>
               </div>
@@ -241,14 +239,12 @@
                 </div>
 
                 <div class="text__setimo-3 text-start mt-3">
-                  <p class="setimo__conteudo__text__card__1">Logística e gestão</p>
+                  <p class="setimo__conteudo__text__card__1">{{ t('products.logistics') }}</p>
                   <h3 class="upper-case setimo__conteudo__text2__card__1">FULL TRACK</h3>
                 </div>
               </div>
 
-              <a href="#" class="text__card__setimo__cases text-center text-decoration-none underline-hover">Veja todos
-                os cases de
-                sucesso <i class="bi bi-arrow-right-short"></i></a>
+              <a href="#" class="text__card__setimo__cases text-center text-decoration-none underline-hover">{{ t('products.cases') }} <i class="bi bi-arrow-right-short"></i></a>
 
             </div>
 
@@ -262,13 +258,10 @@
   <div class="container-fluid oitavo__container">
     <div class="container-sm">
       <div class="row mt-5">
-        <p class="text-center text__oitavo__p">“Simplesmente a melhor escolha em <br>gestão de canhotos que já
-          encontrei.<br> Reduzimos custos, gastos e aumentamos <br>o desempenho dessas equipes!<br> Obrigado, FullTime!”
-        </p>
+        <p class="text-center text__oitavo__p">{{ t('testimonial.finalQuote') }}</p>
 
         <img src="@/assets/img/oval-2.png" class="img-fluid img__oitavo__container text-center">
-        <p class="text-center text__oitavo__p__2 mt-1">Allan Borges<br><span class="text__oitavo__p__3">Owner da
-            SharkShop</span></p>
+        <p class="text-center text__oitavo__p__2 mt-1">{{ t('testimonial.finalAuthor') }}<br><span class="text__oitavo__p__3">{{ t('testimonial.finalRole') }}</span></p>
 
       </div>
     </div>
@@ -280,34 +273,34 @@
       <div class="row mt-5">
 
         <div class="planos">
-          <div class="text__planos">Escolha o melhor plano para sua empresa</div>
+          <div class="text__planos">{{ t('plans.title') }}</div>
 
           <div class="card__planos">
             <div class="card__planos__container">
               <div class="card__planos__container__2">
                 <div class="card__planos__container__3">
-                  <div class="card__planos__title">Plano 1</div>
+                  <div class="card__planos__title">{{ t('plans.one') }}</div>
                   <div class="card__planos__container__interno">
                     <div class="card__planos__texto__1">R$</div>
                     <div class="card__planos__texto__2__div">
                       <div class="card__planos__texto__2">12</div>
-                      <div class="card__planos__texto__1">/mês</div>
+                      <div class="card__planos__texto__1">{{ t('plans.month') }}</div>
                     </div>
                   </div>
                   <div class="card__planos__texto__3__div">
 
                     <div class="text-center">
-                      <span class="card__planos__texto__3__span">Economize</span>
+                      <span class="card__planos__texto__3__span">{{ t('plans.save') }}</span>
                       <span class="card__planos__texto__3__span__2">R$156</span>
                     </div>
 
                     <div class="text-center">
-                      <span class="card__planos__text__3__span__3">R$2.128 por ano<br />em até </span>
-                      <span class="card__planos__text__span__4">6x sem juros</span>
+                      <span class="card__planos__text__3__span__3">R$2.128 {{ t('plans.perYear') }} </span>
+                      <span class="card__planos__text__span__4">{{ t('plans.interestFree') }}</span>
                     </div>
                   </div>
                   <div class="card__planos__umedois">
-                    <RouterLink to="/cadastro-empresa" class="card__planos__text__3__botao text-decoration-none">Comprar plano</RouterLink>
+                    <RouterLink to="/cadastro-empresa" class="card__planos__text__3__botao text-decoration-none">{{ t('plans.buy') }}</RouterLink>
                   </div>
                 </div>
                 <div class="card__planos__container__secundario">
@@ -316,19 +309,19 @@
                     <div class="card__planos__container__quinto">
                       <i class='bx bxs-user icone'></i>
                     </div>
-                    <div class="card__planos__container__sexto__text">2 usuários</div>
+                    <div class="card__planos__container__sexto__text">{{ '2 ' + t('plans.users') }}</div>
                   </div>
                   <div class="card__planos__container__quarto">
                     <div class="card__planos__container__quinto">
                       <i class='bx bx-file icone'></i>
                     </div>
-                    <div class="card__planos__container__sexto__text">100 canhotos/mês</div>
+                    <div class="card__planos__container__sexto__text">{{ '100 ' + t('plans.receipts') }}</div>
                   </div>
                   <div class="card__planos__container__quarto">
                     <div class="card__planos__container__quinto">
                       <i class='bx bxs-user-voice icone'></i>
                     </div>
-                    <div class="card__planos__container__sexto__text">Suporte e-mail e ticket</div>
+                    <div class="card__planos__container__sexto__text">{{ t('plans.support') }}</div>
                   </div>
                 </div>
               </div>
@@ -338,28 +331,28 @@
               <div class="card__planos2__secundo">
                 <div class="card__planos__container__2">
                   <div class="card__planos__container__3">
-                    <div class="card__planos__title"> Plano 2</div>
+                    <div class="card__planos__title">{{ t('plans.two') }}</div>
                     <div class="card__planos__container__interno">
                       <div class="card__planos__texto__1">R$</div>
                       <div class="card__planos__texto__2__div">
                         <div class="card__planos__texto__2">94</div>
-                        <div class="card__planos__texto__1">/mês</div>
+                        <div class="card__planos__texto__1">{{ t('plans.month') }}</div>
                       </div>
                     </div>
                     <div class="card__planos__texto__3__div">
                       <div class="text-center">
-                        <span class="card__planos__texto__3__span">Economize</span>
+                        <span class="card__planos__texto__3__span">{{ t('plans.save') }}</span>
                         <span class="card__planos__texto__3__span__2">5%</span>
-                        <span class="card__planos__texto__3__span">à vista</span>
+                        <span class="card__planos__texto__3__span">{{ t('plans.cash') }}</span>
                       </div>
                       
                       <div class="text-center">
-                        <span class="card__planos__text__3__span__3">R$1.128 por ano<br />em até </span>
-                        <span class="card__planos__text__span__4">6x sem juros</span>
+                        <span class="card__planos__text__3__span__3">R$1.128 {{ t('plans.perYear') }} </span>
+                        <span class="card__planos__text__span__4">{{ t('plans.interestFree') }}</span>
                       </div>
                     </div>
                     <div class="card__planos__text__3__plano2__antesbotao">
-                      <RouterLink to="/cadastro-empresa" class="card__planos__text__3__botao text-decoration-none">Comprar plano</RouterLink>
+                      <RouterLink to="/cadastro-empresa" class="card__planos__text__3__botao text-decoration-none">{{ t('plans.buy') }}</RouterLink>
                     </div>
                   </div>
                   <div class="card__planos__container__secundario">
@@ -368,25 +361,25 @@
                       <div class="card__planos__container__quinto">
                         <i class='bx bxs-user icone'></i>
                       </div>
-                      <div class="card__planos__container__sexto__text">15 usuários</div>
+                      <div class="card__planos__container__sexto__text">{{ '15 ' + t('plans.users') }}</div>
                     </div>
                     <div class="card__planos__container__quarto">
                       <div class="card__planos__container__quinto">
                         <i class='bx bx-file icone'></i>
                       </div>
-                      <div class="card__planos__container__sexto__text">1500 canhotos/mês</div>
+                      <div class="card__planos__container__sexto__text">{{ '1500 ' + t('plans.receipts') }}</div>
                     </div>
                     <div class="card__planos__container__quarto">
                       <div class="card__planos__container__quinto">
                         <i class='bx bxs-user-voice icone'></i>
                       </div>
-                      <div class="card__planos__container__sexto__text">Suporte e-mail e ticket</div>
+                      <div class="card__planos__container__sexto__text">{{ t('plans.support') }}</div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="card__texto__plano2__custo">
-                <div class="card__planos__planos2__textocusto">Melhor custo benefício</div>
+                <div class="card__planos__planos2__textocusto">{{ t('plans.bestValue') }}</div>
               </div>
             </div>
 
@@ -394,28 +387,28 @@
             <div class="card__planos__container">
               <div class="card__planos__container__2">
                 <div class="card__planos__container__3">
-                  <div class="card__planos__title">Plano 3</div>
+                  <div class="card__planos__title">{{ t('plans.three') }}</div>
                   <div class="card__planos__container__interno">
                     <div class="card__planos__texto__1">R$</div>
                     <div class="card__planos__texto__2__div">
                       <div class="card__planos__texto__2">25</div>
-                      <div class="card__planos__texto__1">/mês</div>
+                      <div class="card__planos__texto__1">{{ t('plans.month') }}</div>
                     </div>
                   </div>
                   <div class="card__planos__texto__3__div">
 
                     <div class="text-center">
-                      <span class="card__planos__texto__3__span">Economize</span>
+                      <span class="card__planos__texto__3__span">{{ t('plans.save') }}</span>
                       <span class="card__planos__texto__3__span__2">R$156</span>
                     </div>
 
                     <div class="text-center">
-                      <span class="card__planos__text__3__span__3">R$2.128 por ano<br />em até </span>
-                      <span class="card__planos__text__span__4">6x sem juros</span>
+                      <span class="card__planos__text__3__span__3">R$2.128 {{ t('plans.perYear') }} </span>
+                      <span class="card__planos__text__span__4">{{ t('plans.interestFree') }}</span>
                     </div>
                   </div>
                   <div class="card__planos__umedois">
-                    <RouterLink to="/cadastro-empresa" class="card__planos__text__3__botao text-decoration-none">Comprar plano</RouterLink>
+                    <RouterLink to="/cadastro-empresa" class="card__planos__text__3__botao text-decoration-none">{{ t('plans.buy') }}</RouterLink>
                   </div>
                 </div>
                 <div class="card__planos__container__secundario">
@@ -424,19 +417,19 @@
                     <div class="card__planos__container__quinto">
                       <i class='bx bxs-user icone'></i>
                     </div>
-                    <div class="card__planos__container__sexto__text">12 usuários</div>
+                    <div class="card__planos__container__sexto__text">{{ '12 ' + t('plans.users') }}</div>
                   </div>
                   <div class="card__planos__container__quarto">
                     <div class="card__planos__container__quinto">
                       <i class='bx bx-file icone'></i>
                     </div>
-                    <div class="card__planos__container__sexto__text">350 canhotos/mês</div>
+                    <div class="card__planos__container__sexto__text">{{ '350 ' + t('plans.receipts') }}</div>
                   </div>
                   <div class="card__planos__container__quarto">
                     <div class="card__planos__container__quinto">
                       <i class='bx bxs-user-voice icone'></i>
                     </div>
-                    <div class="card__planos__container__sexto__text"> Suporte e-mail e ticket</div>
+                      <div class="card__planos__container__sexto__text">{{ t('plans.support') }}</div>
                   </div>
                 </div>
               </div>
@@ -446,7 +439,7 @@
 
 
         
-        <div class="text__planos mt-1 mb-5"><span class="text__planos__consultor">ou</span> <a class="text-decoration-none text__planos underline-hover" href="#">fale com um consultor</a></div>
+        <div class="text__planos mt-1 mb-5"><span class="text__planos__consultor">{{ t('plans.or') }}</span> <a class="text-decoration-none text__planos underline-hover" href="#">{{ t('plans.consultant') }}</a></div>
       </div>
 
     </div>
@@ -463,7 +456,7 @@
         <div class="col mb-3"></div>
 
         <div class="col mb-3">
-          <h5 class="upper-case text__footer__principal">SOLUÇÕES</h5>
+          <h5 class="upper-case text__footer__principal">{{ t('footer.solutions') }}</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">FullArm</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">FullCam</a></li>
@@ -476,28 +469,27 @@
         </div>
 
         <div class="col mb-3">
-          <h5 class="upper-case text__footer__principal">Institucional</h5>
+          <h5 class="upper-case text__footer__principal">{{ t('footer.institutional') }}</h5>
           <ul class="nav flex-column">
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Sobre</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Soluções</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Blog</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Revendedores</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Contato</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Regulamentos de
-                Campanha</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Trabalhe Conosco</a>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.about') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.solutions') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.blog') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.resellers') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.contact') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.regulations') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.careers') }}</a>
             </li>
 
-            <h5 class="upper-case  text__footer__principal">Unidades</h5>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Latam</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">México</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Argentina</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">Brasil</a></li>
+            <h5 class="upper-case  text__footer__principal">{{ t('footer.units') }}</h5>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.latam') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.mexico') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.argentina') }}</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text__footer__secundario">{{ t('footer.brazil') }}</a></li>
           </ul>
         </div>
 
         <div class="col mb-3">
-          <h5 class="upper-case text__footer__principal">Fale Conosco</h5>
+          <h5 class="upper-case text__footer__principal">{{ t('footer.talk') }}</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white"><img
                   src="@/assets/img/iconamoon_phone-fill.png"> +55 (14) 3407 8800</a></li>
@@ -513,4 +505,7 @@
   </div>
 </template>
 <script setup>
+import { useI18n } from '@/locales/index.js';
+
+const { locale, locales, t, setLocale } = useI18n();
 </script>

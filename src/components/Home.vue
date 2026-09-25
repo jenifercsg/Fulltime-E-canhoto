@@ -6,8 +6,16 @@
       >
         <div class="image-profile rounded-circle">
           <img
+            v-if="urlPerfilFoto"
             :src="this.urlPerfilFoto"
             alt="Imagem de perfil"
+            class="rounded-circle"
+            width="40"
+          />
+          <img
+            v-else
+            src="@/assets/img/profile-circle-example.png"
+            alt="Imagem de perfil padrão"
             class="rounded-circle"
             width="40"
           />
@@ -16,7 +24,7 @@
     </nav>
 
     <div class="container-fluid background-colors">
-      <h6 class="text p-5 text-visao-geral">Visão geral da empresa</h6>
+      <h6 class="text p-5 text-visao-geral">{{ $t('dashboard.overview') }}</h6>
 
       <div class="row">
         <div class="col-lg-3 cards-colunas">
@@ -25,10 +33,10 @@
               class="card-body d-flex align-items-start justify-content-between"
             >
               <div>
-                <h5 class="card-title mt-3">Usuários do mês</h5>
+                <h5 class="card-title mt-3">{{ $t('dashboard.usersMonth') }}</h5>
                 <h1 class="card-text mt-3">{{ totalUsuariosDoMes }}</h1>
                 <h6 class="card-subtitle mb-2 text-body-secondary">
-                  <span class="fw-bold">{{ totalUsuariosHoje }}</span> Hoje
+                  <span class="fw-bold">{{ totalUsuariosHoje }}</span> {{ $t('common.today') }}
                 </h6>
               </div>
               <img
@@ -46,10 +54,10 @@
               class="card-body d-flex align-items-start justify-content-between"
             >
               <div>
-                <h5 class="card-title mt-3">Canhotos do mês</h5>
+                <h5 class="card-title mt-3">{{ $t('dashboard.receiptsMonth') }}</h5>
                 <h1 class="card-text mt-3">{{ totalCanhotosDoMes }}</h1>
                 <h6 class="card-subtitle mb-2 text-body-secondary">
-                  <span class="fw-bold">{{ totalCanhotosHoje }}</span> Hoje
+                  <span class="fw-bold">{{ totalCanhotosHoje }}</span> {{ $t('common.today') }}
                 </h6>
               </div>
               <img
@@ -66,10 +74,10 @@
               class="card-body d-flex align-items-start justify-content-between"
             >
               <div>
-                <h5 class="card-title mt-3">Total de canhotos</h5>
+                <h5 class="card-title mt-3">{{ $t('dashboard.totalReceipts') }}</h5>
                 <h1 class="card-text mt-3">{{ totalCanhotos }}</h1>
                 <h6 class="card-subtitle mb-2 text-body-secondary">
-                  <span class="fw-bold">{{ totalCanhotosHoje }}</span> Hoje
+                  <span class="fw-bold">{{ totalCanhotosHoje }}</span> {{ $t('common.today') }}
                 </h6>
               </div>
               <img
@@ -86,10 +94,10 @@
               class="card-body d-flex align-items-start justify-content-between"
             >
               <div>
-                <h5 class="card-title mt-3">Plano Gold</h5>
-                <h5 class="card-text mt-4 mb-4">Próx fatura: 28/06/2024</h5>
+                <h5 class="card-title mt-3">{{ $t('dashboard.goldPlan') }}</h5>
+                <h5 class="card-text mt-4 mb-4">{{ $t('dashboard.nextInvoice') }}: 28/06/2024</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">
-                  Ver fatura
+                  {{ $t('dashboard.viewInvoice') }}
                 </h6>
               </div>
               <img
@@ -106,7 +114,7 @@
         >
           <div class="text-table d-flex text-table-botoes">
             <h4 class="mt-4 ms-3 mb-3 usuarios-table-title">
-              Gestão de usuários
+              {{ $t('dashboard.userManagement') }}
             </h4>
 
             <Button
@@ -114,7 +122,7 @@
               @click="newUser"
               class="btn btn-sm btn-outline-danger mt-3 ms-5 mb-3 add-canhoto-text text-decoration-none d-flex justify-content-center align-items-center ms-auto novo-canhoto"
             >
-              Novo Usuário
+              {{ $t('dashboard.newUser') }}
               <i
                 class="bx bx-plus arrow-footer-table d-flex justify-content-center align-items-center"
               ></i>
@@ -123,11 +131,11 @@
 
           <DataTable :value="colaboradores" paginator :rows="7">
             <Column field="id" header="ID"></Column>
-            <Column field="name" header="Nome"></Column>
-            <Column field="email" header="Email"></Column>
-            <Column field="dataNascimento" header="Data de Nascimento"></Column>
+            <Column field="name" :header="$t('dashboard.name')"></Column>
+            <Column field="email" :header="$t('dashboard.email')"></Column>
+            <Column field="dataNascimento" :header="$t('dashboard.birthDate')"></Column>
 
-            <Column field="usuarioAdmin" header="É admin">
+            <Column field="usuarioAdmin" :header="$t('dashboard.admin')">
               <template #body="slotProps">
                 <Badge
                   class="d-flex justify-content-center"
@@ -137,13 +145,13 @@
               </template>
             </Column>
 
-            <Column field="dataInclusao" header="Data de inclusão">
+            <Column field="dataInclusao" :header="$t('dashboard.includedAt')">
               <template #body="slotProps">
                 {{ this.formataData(slotProps.data.dataInclusao) }}
               </template>
             </Column>
 
-            <Column header="Opções">
+            <Column :header="$t('dashboard.options')">
               <template #body="slotProps">
                 <i class="bx bxs-edit" @click="editUser(slotProps.data.id)"></i>
               </template>
@@ -156,35 +164,35 @@
         >
           <div class="text-table d-flex text-table-botoes">
             <h5 class="mt-4 ms-3 mb-3 canhotos-table-title me-auto">
-              Últimos canhotos
+              {{ $t('dashboard.recent') }}
             </h5>
           </div>
 
           <DataTable :value="canhotos" paginator :rows="7" :sortOrder="1">
             <Column field="id" header="ID" filterField="id"></Column>
 
-            <Column field="valorCanhoto" header="Valor do Recibo">
+            <Column field="valorCanhoto" :header="$t('canhotos.value')">
               <template #body="slotProps">
                 {{ this.formataValor(slotProps.data.valorCanhoto) }}
               </template>
             </Column>
 
-            <Column field="numNf" header="Número NF"></Column>
-            <Column field="chaveNf" header="Chave NF"></Column>
+            <Column field="numNf" :header="$t('canhotos.nf')"></Column>
+            <Column field="chaveNf" :header="$t('canhotos.key')"></Column>
 
-            <Column field="colaboradorId" header="Gerador (Entrega)">
+            <Column field="colaboradorId" :header="$t('canhotos.generator')">
               <template #body="slotProps">
                 {{ this.buscaColaborador(slotProps.data.colaboradorId) }}
               </template>
             </Column>
 
-            <Column field="dataInclusao" header="Data de Inclusão">
+            <Column field="dataInclusao" :header="$t('canhotos.includedAt')">
               <template #body="slotProps">
                 {{ this.formataData(slotProps.data.dataInclusao) }}
               </template>
             </Column>
 
-            <Column field="autenticado" header="Autenticado">
+            <Column field="autenticado" :header="$t('canhotos.authenticated')">
               <template #body="slotProps">
                 <Badge
                   class="justify-content-center text-center"
@@ -210,7 +218,7 @@
               to="/canhotos"
               class="btn btn-sm btn-outline-danger mt-2 mb-3 add-canhoto-text text-decoration-none d-flex justify-content-center align-items-center"
             >
-              Ver todos os canhotos
+              {{ $t('dashboard.allReceipts') }}
               <i
                 class="bx bx-right-arrow-alt arrow-footer-table d-flex justify-content-center align-items-center"
               ></i>
@@ -221,14 +229,14 @@
         <Dialog
           v-model:visible="visible"
           modal
-          :header="isEditMode ? 'Atualizar canhoto' : 'Novo Canhoto'"
+          :header="isEditMode ? $t('canhotos.update') : $t('canhotos.create')"
           :style="{
             width: isEditMode ? '73rem' : '75rem',
             height: isEditMode ? '30rem' : '33.9rem',
           }"
         >
           <div v-if="!isEditMode" class="flex align-items-center gap-4 mb-3">
-            <label for="empresa" class="font-semibold mb-2">Empresa</label
+            <label for="empresa" class="font-semibold mb-2">{{ $t('canhotos.company') }}</label
             ><br />
 
             <InputText
@@ -243,7 +251,7 @@
           <div class="row">
             <div class="col-md-4 mb-3">
               <label for="valor" class="mb-2">
-                Valor do canhoto <span class="text-danger">*</span> </label
+                {{ $t('canhotos.receiptValue') }} <span class="text-danger">*</span> </label
               ><br />
 
               <InputNumber
@@ -257,7 +265,7 @@
 
             <div class="col-md-4 mb-3">
               <label for="numNf" class="mb-2">
-                Número da Nota fiscal <span class="text-danger">*</span> </label
+                {{ $t('canhotos.nfNumber') }} <span class="text-danger">*</span> </label
               ><br />
 
               <InputNumber
@@ -270,8 +278,8 @@
 
             <div class="col-md-4 mb-3">
               <label for="chaveNf" class="mb-2">
-                Número da Chave da Nota Fiscal
-                <span class="text-warning">(Opcional)</span> </label
+                {{ $t('canhotos.nfKey') }}
+                <span class="text-warning">({{ $t('common.optional') }})</span> </label
               ><br />
 
               <InputNumber
@@ -284,7 +292,7 @@
 
             <div class="col-md-4 mb-3" v-if="!isEditMode">
               <label for="colaborador" class="font-semibold mb-2"
-                >Gerado por</label
+                >{{ $t('canhotos.generatedBy') }}</label
               ><br />
 
               <InputText
@@ -305,7 +313,7 @@
                 v-model="post.selectedStatus"
                 :options="status"
                 optionLabel="name"
-                placeholder="Selecione o status"
+                :placeholder="$t('common.selectStatus')"
                 checkmark
                 :highlightOnSelect="false"
                 class="w-100"
@@ -315,7 +323,7 @@
 
           <div class="flex align-items-center gap-3 mb-5" v-show="showUpload">
             <label for="image" class="font-semibold mb-2">
-              Selecione a imagem do canhoto </label
+              {{ $t('canhotos.image') }} </label
             ><br />
 
             <FileUpload
@@ -325,7 +333,7 @@
               :maxFileSize="1000000"
               @select="onSelect"
               class="w-15"
-              chooseLabel="Upload"
+              :chooseLabel="$t('common.upload')"
             />
           </div>
 
@@ -336,7 +344,7 @@
               @click="visible = false"
               class="btn btn-danger me-1"
             >
-              Cancelar
+              {{ $t('common.cancel') }}
             </Button>
 
             <Button
@@ -344,7 +352,7 @@
               @click="saveCanhoto()"
               class="btn btn-success"
             >
-              Salvar
+              {{ $t('common.save') }}
             </Button>
           </div>
         </Dialog>
@@ -352,7 +360,7 @@
         <Dialog
           v-model:visible="visibleUser"
           modal
-          :header="isEditModeUser ? 'Editar Usuário' : 'Novo Usuário'"
+          :header="isEditModeUser ? $t('common.edit') : $t('dashboard.newUser')"
           :style="{ width: '55rem', height: '30rem' }"
         >
           <div class="row">
@@ -388,7 +396,7 @@
           <div class="row">
             <div class="col-md-5 mb-3">
               <label for="email" class="mb-2">
-                E-mail <span class="text-danger">*</span> </label
+                {{ $t('registration.email') }} <span class="text-danger">*</span> </label
               ><br />
 
               <InputText
@@ -402,7 +410,7 @@
 
             <div class="col-md-3 mb-3" v-if="!isEditModeUser">
               <label for="senha" class="mb-2">
-                Senha <span class="text-danger">*</span> </label
+                {{ $t('registration.password') }} <span class="text-danger">*</span> </label
               ><br />
 
               <InputText
@@ -417,7 +425,7 @@
 
             <div class="col-md-4 mb-3">
               <label for="nascimento" class="font-semibold mb-2">
-                Data de Nascimento <span class="text-danger">*</span> </label
+                {{ $t('registration.birthDate') }} <span class="text-danger">*</span> </label
               ><br />
 
               <InputText
@@ -431,7 +439,7 @@
 
             <div class="col-md-5 mb-3">
               <label for="status" class="font-semibold mb-2">
-                É administrador? <span class="text-danger">*</span> </label
+                {{ $t('dashboard.admin') }} <span class="text-danger">*</span> </label
               ><br />
 
               <Dropdown
@@ -441,7 +449,7 @@
                   { name: 'Não', code: 0 },
                 ]"
                 optionLabel="name"
-                placeholder="Selecione o status"
+                :placeholder="$t('common.selectStatus')"
                 checkmark
                 :highlightOnSelect="false"
                 class="w-100"
@@ -471,11 +479,11 @@
               @click="visibleUser = false"
               class="btn btn-danger me-1"
             >
-              Cancelar
+              {{ $t('common.cancel') }}
             </Button>
 
             <Button type="button" @click="saveUser()" class="btn btn-success">
-              Salvar
+              {{ $t('common.save') }}
             </Button>
           </div>
         </Dialog>
