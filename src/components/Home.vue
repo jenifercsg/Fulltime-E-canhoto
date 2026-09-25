@@ -505,6 +505,7 @@ import {
   formatarValorBrasil,
 } from "@/services/utils";
 import { useAuth } from "@/stores/auth.js";
+import { DEMO_USER, PORTFOLIO_DEMO } from "@/config/demo.js";
 
 export default {
   name: "home",
@@ -953,9 +954,34 @@ export default {
         );
       });
     },
+
+    loadDemoData() {
+      this.userAdmin = false;
+      this.empresaRelacionadaId = DEMO_USER.empresaId;
+      this.empresaRelacionada = "Empresa de demonstração";
+      this.nomeUsuario = DEMO_USER.name;
+      this.usuarioId = DEMO_USER.id;
+      this.urlPerfilFoto = DEMO_USER.urlPerfilFoto;
+      this.totalUsuarios = 12;
+      this.totalUsuariosDoMes = 8;
+      this.totalUsuariosHoje = 1;
+      this.totalCanhotos = 124;
+      this.totalCanhotosDoMes = 32;
+      this.totalCanhotosHoje = 4;
+      this.canhotos = [];
+      this.colaboradores = [];
+      this.usuarios = [];
+      this.usuariosBusca = [];
+      this.status = [];
+    },
   },
 
   mounted() {
+    if (PORTFOLIO_DEMO) {
+      this.loadDemoData();
+      return;
+    }
+
     this.getDados();
     this.getStatus();
     this.getAllColaboradores();

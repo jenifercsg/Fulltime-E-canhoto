@@ -1,8 +1,14 @@
 import { useAuth } from "@/stores/auth.js";
+import { PORTFOLIO_DEMO } from "@/config/demo.js";
 
 export default async function routes(to, from, next) {
   
   if (to.meta?.auth) {
+
+    if (PORTFOLIO_DEMO) {
+      next();
+      return;
+    }
 
     const auth = useAuth();
 

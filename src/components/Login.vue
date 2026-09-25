@@ -54,6 +54,7 @@
   import http from '@/http-common';
   import { useAuth } from '@/stores/auth.js';
   import { useI18n } from '@/locales/index.js';
+  import { DEMO_USER, PORTFOLIO_DEMO } from '@/config/demo.js';
   
   const auth = useAuth();
   const { t } = useI18n();
@@ -67,6 +68,14 @@
   const errorMessage = ref('');
   
   async function login() {
+    if (PORTFOLIO_DEMO) {
+      auth.setToken('portfolio-demo-token');
+      auth.setUser(DEMO_USER);
+      errorMessage.value = '';
+      await router.push('/home');
+      return;
+    }
+
     try {
       const { data } = await http.post('/Users/authenticate', user);
       auth.setToken(data.token);
