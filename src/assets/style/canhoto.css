@@ -583,6 +583,15 @@
     max-width: 100%;
 }
 
+.home .dados-canhoto-table .p-datatable-table {
+    min-width: 680px;
+}
+
+.home .dados-canhoto-table th,
+.home .dados-canhoto-table td {
+    white-space: nowrap;
+}
+
 .home .p-inputnumber-input {
     width: 100% !important;
     max-width: 100%;
@@ -686,6 +695,6 @@
 
 @media (max-width: 767.98px) {
     .home .background-colors::before {
-        height: 4rem;
+        height: 2.5rem;
     }
 }

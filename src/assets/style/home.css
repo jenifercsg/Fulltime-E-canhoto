@@ -771,7 +771,7 @@
 
   @media (max-width: 767.98px) {
       .home .background-colors::before {
-          height: 4rem;
+          height: 2.5rem;
       }
 
       .home .background-colors > .row:first-of-type {

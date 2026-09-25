@@ -5,7 +5,29 @@ body {
   font-family: Montserrat, 'Roboto', sans-serif;
   min-width: 0;
   min-height: 100vh;
+  margin: 0;
   overflow-x: hidden;
+}
+
+html,
+#app {
+  min-height: 100%;
+}
+
+#app {
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+#app > main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .containerLogin {
@@ -20,7 +42,7 @@ body {
   display: flex;
   justify-content: center;
   padding: 32px clamp(18px, 5vw, 48px);
-  margin: 5rem auto 2rem;
+  margin: 0;
 }
 
 .btn__cliente__texto, .btn__cliente__texto a {
@@ -114,10 +136,21 @@ p {
 
 /* Media queries */
 @media screen and (max-width: 768px) {
+  #app {
+    align-items: center;
+    padding: 2rem 0.75rem;
+  }
+
   .containerLogin {
     width: min(520px, calc(100% - 1.5rem));
     min-height: 560px;
-    margin: 2rem auto 1rem;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 768px) and (max-height: 650px) {
+  #app {
+    align-items: flex-start;
   }
 }
 
@@ -125,7 +158,7 @@ p {
   .containerLogin {
     width: calc(100% - 1rem);
     min-height: 0;
-    margin: 1rem auto;
+    margin: 0 auto;
     padding: 28px 16px;
   }
 
