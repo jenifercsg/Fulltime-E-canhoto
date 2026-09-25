@@ -657,3 +657,35 @@
         max-width: 100%;
     }
 }
+
+/* Mantém Canhotos e Colaboradores com a mesma faixa de título do dashboard. */
+.home .background-colors {
+    position: relative !important;
+    min-height: calc(100vh - 70px) !important;
+    height: auto !important;
+    overflow: hidden;
+    background: var(--body-color) !important;
+}
+
+.home .background-colors::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: clamp(80px, 16vh, 145px);
+    background: var(--primary-color);
+    pointer-events: none;
+}
+
+.home .background-colors > * {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 767.98px) {
+    .home .background-colors::before {
+        height: 4rem;
+    }
+}
