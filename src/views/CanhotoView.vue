@@ -9,11 +9,13 @@ const canhotoRef = ref(null);
 
 onMounted(() => {
     const body = document.querySelector("body");
-    const sidebar = body.querySelector(".sidebar");
-    const toggle = body.querySelector(".toggle");
+    const sidebar = body?.querySelector(".sidebar");
+    const toggle = body?.querySelector(".toggle");
+
+    if (!sidebar || !toggle) return;
 
     toggle.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
+      sidebar.classList.toggle("close");
     });
 });
 

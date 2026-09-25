@@ -68,7 +68,7 @@
     </div>
   </div>
 
-  <div class="container-fluid d-flex justify-content-center position-relative mt-5">
+  <div class="container-fluid beneficios__cards d-flex justify-content-center position-relative mt-5">
     <div class="col-md-3 segundo__bloco__1">
       <img src="@/assets/img/cloud.png" class="img__icone__1 img-fluid" alt="">
       <h6 class="bloco__text__1">Cloud</h6>

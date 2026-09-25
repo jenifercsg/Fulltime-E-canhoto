@@ -84,6 +84,9 @@ export default {
         this.userAdmin = responseUser.isAdmin;
       });
     }
+  },
+  mounted() {
+    this.getDados();
   }
 }
 </script>

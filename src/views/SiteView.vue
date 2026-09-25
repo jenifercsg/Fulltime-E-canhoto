@@ -5,7 +5,7 @@ import '@/assets/style/site.css';
 
 </script>
 <template>
-  <main>
+  <main class="site-page">
     <HomePrinc />
   </main>
 </template>
